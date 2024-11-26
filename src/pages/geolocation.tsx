@@ -27,6 +27,9 @@ export default () => {
                     setMessage(`未知错误: ${error.message}`)
             }
         },
+        {
+            timeout: 2000
+        }
     )
     return (<div>
         <div>{JSON.stringify(coords())}</div>
