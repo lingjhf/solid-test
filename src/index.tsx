@@ -1,6 +1,6 @@
 import { lazy } from "solid-js";
 import { render } from "solid-js/web";
-import { Router, Route } from "@solidjs/router";
+import { Router, HashRouter, Route } from "@solidjs/router";
 
 import App from './App';
 
@@ -17,8 +17,8 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 }
 
 render(() => (
-  <Router >
+  <HashRouter >
     <Route path="/wasm" component={WasmPage} />
     <Route path="/geolocation" component={GeolocationPage} />
-  </Router>
+  </HashRouter>
 ), root!);
