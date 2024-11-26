@@ -5,9 +5,15 @@ export default () => {
 
     const [coords, setCoords] = createSignal<[number, number]>()
     const [message, setMessage] = createSignal('')
+    const [time, setTime] = createSignal(0)
+
+    const t = setInterval(() => {
+        setTime(value => ++value)
+    }, 1000)
 
     navigator.geolocation.getCurrentPosition(
         (position) => {
+            clearInterval(t)
             setCoords([position.coords.longitude, position.coords.latitude])
             setMessage("成功")
         },
@@ -27,12 +33,10 @@ export default () => {
                     setMessage(`未知错误: ${error.message}`)
             }
         },
-        {
-            timeout: 2000
-        }
     )
     return (<div>
         <div>{JSON.stringify(coords())}</div>
+        <div>{time()}</div>
         <div>{message()}</div>
     </div>)
 }
