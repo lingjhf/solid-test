@@ -18,7 +18,7 @@ steps:
     commands:
       - npm install -g pnpm
       - which pnpm
-      - ls /usr/local/bin/
+      - ls /usr/local/lib/
       - pnpm i
       - pnpm build
   - name: rebuild-cache
