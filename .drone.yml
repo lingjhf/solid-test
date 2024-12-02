@@ -21,6 +21,7 @@ steps:
       - ls /usr/local/lib/
       - pnpm i
       - pnpm build
+      - ls
   - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:
