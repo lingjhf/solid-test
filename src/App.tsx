@@ -12,7 +12,7 @@ const App: Component = () => {
 
   return (
     <div>
-      sdf123sdfsdf123123asdfsdf
+      ABC
     </div>
   );
 };
