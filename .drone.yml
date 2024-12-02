@@ -10,7 +10,7 @@ steps:
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
-        path: /home/lighthouse/drone
+        path: /home/lighthouse/drone2
     settings:
       restore: true
       mount:
@@ -19,7 +19,7 @@ steps:
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
-        path: /home/lighthouse/drone
+        path: /home/lighthouse/drone2
     settings:
       rebuild: true
       mount:
@@ -28,4 +28,4 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /home/lighthouse/drone
+      path: /home/lighthouse/drone2
