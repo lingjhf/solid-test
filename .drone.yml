@@ -4,7 +4,7 @@ name: default
 
 trigger:
   branch:
-    - drone # 仅当分支是 dev 时触发
+    - master # 仅当分支是 dev 时触发
 
 steps:
   # 恢复缓存
@@ -21,8 +21,8 @@ steps:
   - name: install_dependencies
     image: node:20
     commands:
-      - npm install -g pnpm                     # 安装 pnpm
-      - pnpm install --frozen-lockfile          # 安装依赖，保持锁文件一致性
+      - npm install -g pnpm # 安装 pnpm
+      - pnpm install --frozen-lockfile # 安装依赖，保持锁文件一致性
 
   # 缓存更新
   - name: rebuild_cache
@@ -39,4 +39,3 @@ steps:
     image: node:20
     commands:
       - npm install -g pnpm
-
