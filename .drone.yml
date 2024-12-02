@@ -12,10 +12,12 @@ steps:
       restore: true
       mount:
         - ./node_modules
+        - ./.pnpm-store
   - name: build
     image: node
     commands:
-      - npm install
+      - npm install pnpm
+      - pnpm i
   - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:
@@ -25,6 +27,7 @@ steps:
       rebuild: true
       mount:
         - ./node_modules
+        - ./.pnpm-store
 volumes:
   - name: cache
     host:
