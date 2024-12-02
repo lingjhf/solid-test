@@ -25,7 +25,6 @@ steps:
       - pnpm build
     when:
     branch:
-      include:
       - dev/*
 
   # - name: scp files
