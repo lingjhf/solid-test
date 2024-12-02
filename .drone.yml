@@ -3,7 +3,7 @@ type: docker
 name: default
 
 steps:
-  - name: restore-cache
+  - name: restore cache
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
@@ -14,11 +14,19 @@ steps:
         - ./node_modules
         - ./.pnpm-store
 
-  - name: build
+  - name: install dependencies
     image: gplane/pnpm:9.14
     commands:
       - pnpm i
+
+  - name: build dev
+    image: gplane/pnpm:9.14
+    commands:
       - pnpm build
+    when:
+    branch:
+      include:
+      - dev/*
 
   # - name: scp files
   #   image: appleboy/drone-scp
@@ -34,7 +42,7 @@ steps:
   #     source:
   #       - dist/*
 
-  - name: rebuild-cache
+  - name: rebuild cache
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
