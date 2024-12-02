@@ -5,17 +5,17 @@ trigger:
   branch:
     - master # 仅当分支是 dev 时触发
 
-volumes:
-  - name: cache
-    host:
-      path: /tmp/cache
+# volumes:
+#   - name: cache
+#     host:
+#       path: /home/lighthouse/cache
 
 steps:
 - name: restore-cache
   image: drillster/drone-volume-cache
   volumes:
     - name: cache
-      path: /cache
+      path: /home/lighthouse/drone
   settings:
     restore: true
     mount:
@@ -24,7 +24,7 @@ steps:
   image: drillster/drone-volume-cache
   volumes:
     - name: cache
-      path: /cache
+      path: /home/lighthouse/drone
   settings:
     rebuild: true
     mount:
