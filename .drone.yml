@@ -5,6 +5,11 @@ trigger:
   branch:
     - master # 仅当分支是 dev 时触发
 
+volumes:
+  - name: cache
+    host:
+      path: /home/lighthouse/drone
+
 steps:
   - name: restore-cache
     image: drillster/drone-volume-cache
