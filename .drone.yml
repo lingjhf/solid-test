@@ -7,6 +7,7 @@ trigger:
 
 volumes:
   - name: cache
+    external: true
     host:
       path: /home/lighthouse/drone
 
@@ -15,7 +16,7 @@ steps:
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
-        path: /tmp/cache:/cache
+        path: /tmp/cache:/home/lighthouse/drone
     settings:
       restore: true
       mount:
@@ -34,7 +35,7 @@ steps:
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
-        path: /tmp/cache:/cache
+        path: /tmp/cache:/home/lighthouse/drone
     settings:
       rebuild: true
       mount:
