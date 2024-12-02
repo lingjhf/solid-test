@@ -11,13 +11,14 @@ steps:
     settings:
       restore: true
       mount:
-        - /usr/local/lib/node_modules
+        - ./node_modules
+        - ./.pnpm-store
   - name: build
     image: node:22.11.0-alpine
     commands:
       - npm install -g pnpm
-      - pwd
-      - ls /usr/local/lib/
+      - pnpm i
+      - pnpm build
   - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:
@@ -26,7 +27,8 @@ steps:
     settings:
       rebuild: true
       mount:
-        - /usr/local/lib/node_modules
+        - ./node_modules
+        - ./.pnpm-store
 volumes:
   - name: cache
     host:
