@@ -11,7 +11,7 @@ steps:
     settings:
       restore: true
       mount:
-        - /usr/local/lib/node_modules
+        - ../../usr/local/lib/node_modules
   - name: build
     image: node:22.11.0-alpine
     commands:
@@ -26,7 +26,7 @@ steps:
     settings:
       rebuild: true
       mount:
-        - /usr/local/lib/node_modules
+        - ../../usr/local/lib/node_modules
 volumes:
   - name: cache
     host:
