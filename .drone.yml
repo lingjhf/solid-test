@@ -17,6 +17,7 @@ steps:
     image: node:22.11.0-alpine
     commands:
       - npm install -g pnpm
+      - which pnpm
       - pnpm i
       - pnpm build
   - name: rebuild-cache
