@@ -39,7 +39,7 @@ steps:
       mount:
         - ./node_modules
         - ./.pnpm-store
-  - name: restore-cache2
+  - name: rebuild-cache2
     image: drillster/drone-volume-cache
     volumes:
       - name: cache2
