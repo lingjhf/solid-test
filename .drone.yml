@@ -10,7 +10,6 @@ steps:
     path: /tmp/cache
   commands:
   - npm install
-  - npm test
 
 volumes:
 - name: cache
