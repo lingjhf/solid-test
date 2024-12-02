@@ -10,28 +10,22 @@ steps:
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
-        path: /home/lighthouse/drone
+        path: /cache
     settings:
       restore: true
       mount:
         - ./node_modules
-        - .pnpm-store
-
-  # 安装依赖
-  - name: install_dependencies
-    image: node:20
-    commands:
-      - npm install -g pnpm # 安装 pnpm
-      - pnpm install --frozen-lockfile # 安装依赖，保持锁文件一致性
-
-  # 缓存更新
-  - name: rebuild_cache
+  - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
-        path: /home/lighthouse/drone
+        path: /cache
     settings:
       rebuild: true
       mount:
         - ./node_modules
-        - .pnpm-store
+
+volumes:
+  - name: cache
+    host:
+      path: /tmp/cache
