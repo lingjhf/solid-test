@@ -1,0 +1,42 @@
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  branch:
+    - drone # 仅当分支是 dev 时触发
+
+steps:
+  # 恢复缓存
+  - name: restore_cache
+    image: drillster/drone-cache
+    settings:
+      restore: true
+      cache-key: pnpm-node20-cache
+      mount:
+        - node_modules
+        - .pnpm-store
+
+  # 安装依赖
+  - name: install_dependencies
+    image: node:20
+    commands:
+      - npm install -g pnpm                     # 安装 pnpm
+      - pnpm install --frozen-lockfile          # 安装依赖，保持锁文件一致性
+
+  # 缓存更新
+  - name: rebuild_cache
+    image: drillster/drone-cache
+    settings:
+      rebuild: true
+      cache-key: pnpm-node20-cache
+      mount:
+        - node_modules
+        - .pnpm-store
+
+  # 构建项目
+  - name: build
+    image: node:20
+    commands:
+      - npm install -g pnpm
+
