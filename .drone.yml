@@ -2,23 +2,17 @@ kind: pipeline
 type: docker
 name: default
 
-trigger:
-  branch:
-    - master # 仅当分支是 dev 时触发
+steps:
+- name: build
+  image: node
+  volumes:
+  - name: cache
+    path: /tmp/cache
+  commands:
+  - npm install
+  - npm test
 
 volumes:
-  - name: cache
-    host:
-      path: /home/lighthouse/drone
-
-steps:
-
-  # 安装依赖
-  - name: install_dependencies
-    image: node:20
-    commands:
-      - npm install # 安装 pnpm
-
-    volumes:
-    - name: cache
-      path: /tmp/cache
+- name: cache
+  host:
+    path: /var/lib/cache
