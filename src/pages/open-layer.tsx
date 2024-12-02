@@ -14,7 +14,6 @@ export default () => {
     onMount(() => {
         const map = new Map({
             target: mapRef,
-i
             layers: [
                 new TileLayer({ source: new OSM() }),
             ],
