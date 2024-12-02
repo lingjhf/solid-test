@@ -28,4 +28,4 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /tmp/cache
+      path: /home/lighthouse/drone
