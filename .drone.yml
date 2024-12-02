@@ -7,7 +7,6 @@ trigger:
 
 volumes:
   - name: cache
-    external: true
     host:
       path: /home/lighthouse/drone
 
