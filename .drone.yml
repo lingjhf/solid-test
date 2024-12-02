@@ -14,10 +14,11 @@ steps:
         - ./node_modules
         - ./.pnpm-store
   - name: build
-    image: node
+    image: node:22.11.0-alpine
     commands:
       - npm install -g pnpm
       - pnpm i
+      - pnpm build
   - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:
