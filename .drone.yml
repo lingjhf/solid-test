@@ -24,8 +24,8 @@ steps:
     commands:
       - pnpm build
     when:
-    branch:
-      - dev/*
+      branch:
+        - dev/*
 
   # - name: scp files
   #   image: appleboy/drone-scp
