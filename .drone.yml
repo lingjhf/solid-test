@@ -16,6 +16,7 @@ steps:
     image: node:22.11.0-alpine
     commands:
       - npm install -g pnpm
+      - pwd
       - ls /usr/local/lib/
   - name: rebuild-cache
     image: drillster/drone-volume-cache
