@@ -1,4 +1,5 @@
 kind: pipeline
+type: docker
 name: default
 
 trigger:
@@ -15,7 +16,7 @@ steps:
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
-        path: /home/lighthouse/drone:/cache
+        path: /home/lighthouse/drone:/tmp
     settings:
       restore: true
       mount:
@@ -34,7 +35,7 @@ steps:
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
-        path: /home/lighthouse/drone:/cache
+        path: /home/lighthouse/drone:/tmp
     settings:
       rebuild: true
       mount:
