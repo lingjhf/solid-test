@@ -19,27 +19,24 @@ steps:
     commands:
       - pnpm i
 
-  - name: build dev
+  - name: build A
     image: gplane/pnpm:9.14
     commands:
       - pnpm build
     when:
       branch:
-        - dev/*
+        - dev/a
 
-  # - name: scp files
-  #   image: appleboy/drone-scp
-  #   settings:
-  #     host:
-  #       - mestest.aoxqwl.com
-  #     username: axq
-  #     password:
-  #       from_secret: server_password
-  #     port: 22
-  #     command_timeout: 2m
-  #     target: /www/wwwroot/mestest.aoxqwl.com
-  #     source:
-  #       - dist/*
+  - name: build B
+    image: gplane/pnpm:9.14
+    commands:
+      - pnpm build
+    when:
+      event:
+      - promote
+      target:
+      - production
+
 
   - name: rebuild cache
     image: drillster/drone-volume-cache

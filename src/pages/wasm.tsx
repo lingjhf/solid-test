@@ -1,6 +1,3 @@
-
-
 export default () => {
-
-    return <div>w</div>
+  return <div>w</div>
 }
