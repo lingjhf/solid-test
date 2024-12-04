@@ -48,7 +48,7 @@ steps:
       command_timeout: 2m
       target: /home/lighthouse
       source:
-        - ./dist/*
+        - ./apps/mes/dist/*
 
   - name: rebuild cache
     image: drillster/drone-volume-cache
