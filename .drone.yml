@@ -41,7 +41,7 @@ steps:
     image: appleboy/drone-scp
     settings:
       host:
-        - mstaging.aoxqwl.com
+        - 43.128.121.164
       username: lighthouse
       password: 1230456aA_
       port: 22
