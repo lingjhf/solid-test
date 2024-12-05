@@ -66,6 +66,12 @@ trigger:
     include:
       - dev/*
 
+volumes:
+  - name: cache
+    host:
+      path: /var/lib/cache
+
+
 ---
 kind: pipeline
 type: docker
