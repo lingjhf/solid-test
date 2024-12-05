@@ -89,11 +89,38 @@ steps:
         - ./node_modules
         - ./.pnpm-store
 
-  - name: install dependencies
+  - name: install dependencies a
     image: gplane/pnpm:9.14
     commands:
       - pnpm i
 
+    when:
+      event:
+        - promote
+      target:
+        - a
+
+  - name: install dependencies b
+    image: gplane/pnpm:9.14
+    commands:
+      - pnpm i
+
+    when:
+      event:
+        - promote
+      target:
+        - b
+        
+  - name: install dependencies c
+    image: gplane/pnpm:9.14
+    commands:
+      - pnpm i
+
+    when:
+      event:
+        - promote
+      target:
+        - c
 
   - name: rebuild cache
     image: drillster/drone-volume-cache
@@ -109,6 +136,12 @@ trigger:
   branch:
     include:
       - release
+  event:
+    - promote
+  target:
+    - a
+    - b
+    - c
 
 volumes:
   - name: cache
