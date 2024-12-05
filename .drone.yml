@@ -94,38 +94,16 @@ steps:
     commands:
       - pnpm i
 
-  - name: build a
+  - name: build
     image: gplane/pnpm:9.14
     commands:
       - pnpm build
 
     when:
-      event:
-        - promote
-      target:
-        - a
+      build: re
 
-  - name: build b
-    image: gplane/pnpm:9.14
-    commands:
-      - pnpm build
+     
 
-    when:
-      event:
-        - promote
-      target:
-        - b
-
-  - name: build c
-    image: gplane/pnpm:9.14
-    commands:
-      - pnpm build
-
-    when:
-      event:
-        - promote
-      target:
-        - c
 
   - name: rebuild cache
     image: drillster/drone-volume-cache
