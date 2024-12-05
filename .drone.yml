@@ -89,10 +89,15 @@ steps:
         - ./node_modules
         - ./.pnpm-store
 
-  - name: install dependencies a
+  - name: install dependencies
     image: gplane/pnpm:9.14
     commands:
       - pnpm i
+
+  - name: build a
+    image: gplane/pnpm:9.14
+    commands:
+      - pnpm build
 
     when:
       event:
@@ -100,10 +105,10 @@ steps:
       target:
         - a
 
-  - name: install dependencies b
+  - name: build b
     image: gplane/pnpm:9.14
     commands:
-      - pnpm i
+      - pnpm build
 
     when:
       event:
@@ -111,10 +116,10 @@ steps:
       target:
         - b
 
-  - name: install dependencies c
+  - name: build c
     image: gplane/pnpm:9.14
     commands:
-      - pnpm i
+      - pnpm build
 
     when:
       event:
