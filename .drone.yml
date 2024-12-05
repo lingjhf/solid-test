@@ -75,7 +75,7 @@ volumes:
 ---
 kind: pipeline
 type: docker
-name: release
+name: pre release
 
 steps:
   - name: restore cache
@@ -94,18 +94,6 @@ steps:
     commands:
       - pnpm i
 
-  - name: build
-    image: gplane/pnpm:9.14
-    commands:
-      - pnpm build
-
-    when:
-      parameter:
-        environment: prod
-
-     
-
-
   - name: rebuild cache
     image: drillster/drone-volume-cache
     volumes:
@@ -120,6 +108,36 @@ trigger:
   branch:
     include:
       - release
+
+volumes:
+  - name: cache
+    host:
+      path: /var/lib/cache
+
+
+---
+kind: pipeline
+type: docker
+name: release
+
+steps:
+  - name: build
+    image: gplane/pnpm:9.14
+    commands:
+      - pnpm build
+
+trigger:
+  branch:
+    include:
+      - release
+  when:
+    event:
+      - promote
+    target:
+      - a
+      - b
+      - c
+
 
 volumes:
   - name: cache
