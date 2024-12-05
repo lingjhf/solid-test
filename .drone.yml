@@ -110,7 +110,7 @@ steps:
         - promote
       target:
         - b
-        
+
   - name: install dependencies c
     image: gplane/pnpm:9.14
     commands:
@@ -136,12 +136,6 @@ trigger:
   branch:
     include:
       - release
-  event:
-    - promote
-  target:
-    - a
-    - b
-    - c
 
 volumes:
   - name: cache
