@@ -126,17 +126,19 @@ steps:
     commands:
       - pnpm build
 
+    when:
+     event:
+       - promote
+     target:
+       - a
+       - b
+       - c
+
 trigger:
   branch:
     include:
       - release
-  when:
-    event:
-      - promote
-    target:
-      - a
-      - b
-      - c
+
 
 
 volumes:
