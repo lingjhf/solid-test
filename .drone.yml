@@ -108,40 +108,13 @@ trigger:
   branch:
     include:
       - release
-
-volumes:
-  - name: cache
-    host:
-      path: /var/lib/cache
-
-
----
-kind: pipeline
-type: docker
-name: release
-
-steps:
-  - name: build
-    image: gplane/pnpm:9.14
-    commands:
-      - pnpm build
-
     when:
-     event:
-       - promote
-     target:
-       - a
-       - b
-       - c
-
-trigger:
-  branch:
-    include:
-      - release
-
-
-
+      event:
+        - promote
+      target:
+        - a
 volumes:
   - name: cache
     host:
       path: /var/lib/cache
+
