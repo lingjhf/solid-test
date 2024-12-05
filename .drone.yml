@@ -100,7 +100,8 @@ steps:
       - pnpm build
 
     when:
-      build: re
+      parameter:
+        environment: prod
 
      
 
