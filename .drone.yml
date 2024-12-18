@@ -4,117 +4,123 @@ type: docker
 name: default
 
 steps:
-  - name: restore cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      restore: true
-      mount:
-        - ./node_modules
-        - ./.pnpm-store
-
-  - name: install dependencies
-    image: gplane/pnpm:9.14
+  - name: flutter
+    image: ghcr.io/lingjhf/flutter-image:3.27.1
     commands:
-      - pnpm i
+      - flutter doctor
 
-  - name: build A
-    image: gplane/pnpm:9.14
-    commands:
-      - pnpm build
-    when:
-      branch:
-        - dev/a
+# steps:
+#   - name: restore cache
+#     image: drillster/drone-volume-cache
+#     volumes:
+#       - name: cache
+#         path: /cache
+#     settings:
+#       restore: true
+#       mount:
+#         - ./node_modules
+#         - ./.pnpm-store
 
-  - name: build B
-    image: gplane/pnpm:9.14
-    commands:
-      - pnpm build
-    when:
-      event:
-      - promote
-      target:
-      - production
+#   - name: install dependencies
+#     image: gplane/pnpm:9.14
+#     commands:
+#       - pnpm i
 
-  - name: publish dev
-    image: appleboy/drone-scp
-    settings:
-      host:
-        - 43.128.121.164
-      username: lighthouse
-      password: 1230456aA_
-      port: 22
-      command_timeout: 2m
-      target: /home/lighthouse
-      source:
-        - ./apps/mes/dist/*
+#   - name: build A
+#     image: gplane/pnpm:9.14
+#     commands:
+#       - pnpm build
+#     when:
+#       branch:
+#         - dev/a
 
-  - name: rebuild cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      rebuild: true
-      mount:
-        - ./node_modules
-        - ./.pnpm-store
-trigger:
-  branch:
-    include:
-      - dev/*
+#   - name: build B
+#     image: gplane/pnpm:9.14
+#     commands:
+#       - pnpm build
+#     when:
+#       event:
+#       - promote
+#       target:
+#       - production
 
-volumes:
-  - name: cache
-    host:
-      path: /var/lib/cache
+#   - name: publish dev
+#     image: appleboy/drone-scp
+#     settings:
+#       host:
+#         - 43.128.121.164
+#       username: lighthouse
+#       password: 1230456aA_
+#       port: 22
+#       command_timeout: 2m
+#       target: /home/lighthouse
+#       source:
+#         - ./apps/mes/dist/*
+
+#   - name: rebuild cache
+#     image: drillster/drone-volume-cache
+#     volumes:
+#       - name: cache
+#         path: /cache
+#     settings:
+#       rebuild: true
+#       mount:
+#         - ./node_modules
+#         - ./.pnpm-store
+# trigger:
+#   branch:
+#     include:
+#       - dev/*
+
+# volumes:
+#   - name: cache
+#     host:
+#       path: /var/lib/cache
 
 
----
-kind: pipeline
-type: docker
-name: pre release
+# ---
+# kind: pipeline
+# type: docker
+# name: pre release
 
-steps:
-  - name: restore cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      restore: true
-      mount:
-        - ./node_modules
-        - ./.pnpm-store
+# steps:
+#   - name: restore cache
+#     image: drillster/drone-volume-cache
+#     volumes:
+#       - name: cache
+#         path: /cache
+#     settings:
+#       restore: true
+#       mount:
+#         - ./node_modules
+#         - ./.pnpm-store
 
-  - name: install dependencies
-    image: gplane/pnpm:9.14
-    commands:
-      - pnpm i
+#   - name: install dependencies
+#     image: gplane/pnpm:9.14
+#     commands:
+#       - pnpm i
 
-  - name: rebuild cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      rebuild: true
-      mount:
-        - ./node_modules
-        - ./.pnpm-store
-trigger:
-  branch:
-    include:
-      - release
-    when:
-      event:
-        - promote
-      target:
-        - a
-volumes:
-  - name: cache
-    host:
-      path: /var/lib/cache
+#   - name: rebuild cache
+#     image: drillster/drone-volume-cache
+#     volumes:
+#       - name: cache
+#         path: /cache
+#     settings:
+#       rebuild: true
+#       mount:
+#         - ./node_modules
+#         - ./.pnpm-store
+# trigger:
+#   branch:
+#     include:
+#       - release
+#     when:
+#       event:
+#         - promote
+#       target:
+#         - a
+# volumes:
+#   - name: cache
+#     host:
+#       path: /var/lib/cache
 
